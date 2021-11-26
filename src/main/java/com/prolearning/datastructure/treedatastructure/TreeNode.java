@@ -1,26 +1,23 @@
 package com.prolearning.datastructure.treedatastructure;
 
-import lombok.Data;
-
-import java.util.PriorityQueue;
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  *
  * @param <T>
  */
-@Data
-public class TreeNode<T> implements Comparable {
-    private T value;
-    private TreeNode leftChild;
-    private TreeNode rightChild;
-    public TreeNode(T value){
-        this.value = value;
+public class TreeNode<T> {
+    public T val;
+    public TreeNode left;
+    public TreeNode right;
+    public TreeNode(T val){
+        this.val = val;
     }
-    public TreeNode(T value, TreeNode leftChild, TreeNode rightChild){
-        this.value = value;
-        this.leftChild = leftChild;
-        this.rightChild = rightChild;
+    public TreeNode(T val, TreeNode leftChild, TreeNode rightChild){
+        this.val = val;
+        this.left = leftChild;
+        this.right = rightChild;
     }
 
     public static void main(String[] args){
@@ -34,16 +31,16 @@ public class TreeNode<T> implements Comparable {
     }
 
     public static void printTree(TreeNode rootNode){
-        PriorityQueue<TreeNode<Integer>> priorityQueue = new PriorityQueue<>();
+        Deque<TreeNode<Integer>> priorityQueue = new ArrayDeque<>();
         priorityQueue.add(rootNode);
         while(!priorityQueue.isEmpty()){
             TreeNode temp = priorityQueue.poll();
-            System.out.println(temp.value);
+            System.out.println(temp.val);
 
-            if(temp.leftChild!=null)
-                priorityQueue.add(temp.leftChild);
-            if(temp.rightChild!=null)
-                priorityQueue.add(temp.rightChild);
+            if(temp.left !=null)
+                priorityQueue.add(temp.left);
+            if(temp.right !=null)
+                priorityQueue.add(temp.right);
         }
     }
 
@@ -54,19 +51,19 @@ public class TreeNode<T> implements Comparable {
 
         int index = 0;
 
-        PriorityQueue<TreeNode> priorityQueue = new PriorityQueue();
+        Deque<TreeNode> priorityQueue = new ArrayDeque<>();
         TreeNode rootNode = new TreeNode(nodes[0]);
         priorityQueue.offer(rootNode);
 
         while(!priorityQueue.isEmpty()){
             TreeNode parentNode = priorityQueue.poll();
             if (index + 1 < nodes.length ) {
-                parentNode.leftChild = new TreeNode(nodes[++index]);
-                priorityQueue.add(parentNode.leftChild);
+                parentNode.left = new TreeNode(nodes[++index]);
+                priorityQueue.add(parentNode.left);
             }
             if (index + 1 < nodes.length ) {
-                parentNode.rightChild = new TreeNode(nodes[++index]);
-                priorityQueue.add(parentNode.rightChild);
+                parentNode.right = new TreeNode(nodes[++index]);
+                priorityQueue.add(parentNode.right);
             }
         }
         return rootNode;
@@ -78,20 +75,21 @@ public class TreeNode<T> implements Comparable {
 
         System.out.println("i = " + i +" , j :" + j +", i+j:" + (i+j));
         TreeNode rootNode = new TreeNode(nodes[i]);
-        rootNode.setLeftChild(createTreeRecursion(nodes, i,level+1));
-        rootNode.setRightChild(createTreeRecursion(nodes, i+1,  level+1));
+        rootNode.left = createTreeRecursion(nodes, i,level+1);
+        rootNode.right = createTreeRecursion(nodes, i+1,  level+1);
         return rootNode;
     }
-
-    @Override
-    public int compareTo(Object o) {
-        int value1 = (int) ((TreeNode)o).value;
-        if((int)this.value == value1)
-            return 0;
-        if((int)this.value > value1)
-            return 1;
-        if((int)this.value < value1)
-            return -1;
-        return -1;
-    }
+//
+//    @Override
+//    public int compareTo(Object o) {
+//        if(o instanceof  Integer){
+//        int value1 = (int) ((TreeNode)o).value;
+//        if((int)this.value == value1)
+//            return 0;
+//        if((int)this.value > value1)
+//            return 1;
+//        if((int)this.value < value1)
+//            return -1;}
+//        return -1;
+//    }
 }
