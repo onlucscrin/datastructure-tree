@@ -19,7 +19,6 @@ public class BinaryTreePreorderTraversal {
         while(!stack.isEmpty()){
             TreeNode treeNode = stack.pop();
             preOrderResult.add((Integer) treeNode.val);
-
             if(treeNode.right!=null) {
                 stack.push(treeNode.right);
             }
@@ -27,6 +26,15 @@ public class BinaryTreePreorderTraversal {
                 stack.push(treeNode.left);
             }
         }
+        return preOrderResult;
+    }
+    public static List<Integer> preorderTraversal(TreeNode root,  List<Integer> preOrderResult) {
+        if(root==null)
+            return preOrderResult;
+        TreeNode treeNode = root;
+        preOrderResult.add((Integer) treeNode.val);
+        preorderTraversal(treeNode.left, preOrderResult);
+        preorderTraversal(treeNode.right, preOrderResult);
         return preOrderResult;
     }
 }
