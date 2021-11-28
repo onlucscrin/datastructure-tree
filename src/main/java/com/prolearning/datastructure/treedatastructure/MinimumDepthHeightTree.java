@@ -11,37 +11,41 @@ public class MinimumDepthHeightTree {
         TreeNode<Integer> treeNode = TreeNode.createTree(nodes);
         int depth = maxDepth(treeNode);
         System.out.println("Depth : "+ depth);
+        depth = maxDepthRecursion(treeNode, 0);
+        System.out.println("Recursion Depth : "+ depth);
 
     }
-
+    public static int maxDepthRecursion(TreeNode root, int level) {
+        if(root == null)
+            return 0;
+        int leftHeight = 1 + maxDepthRecursion(root.left, level);
+        int rightHeight = 1 + maxDepthRecursion(root.right, level);
+        return Math.max(leftHeight, rightHeight);
+    }
     public static int maxDepth(TreeNode root) {
         Stack<TreeNode> stack = new Stack<>();
+        Stack<Integer> stackLevel = new Stack<>();
         stack.push(root);
+        stackLevel.push(1);
         int level =0;
         int maxLevel = 0;
         while(!stack.isEmpty()){
             TreeNode node = stack.pop();
-            System.out.println("Level : "+ level);
-            System.out.println("node.left : "+ node.left);
-
-            if(node.left!=null) {
-                System.out.println("level.left : "+ level);
-                stack.push(node.left);
+            Integer stackLev  = stackLevel.pop();
+            if(node.left!=null || node.right!=null){
+                stackLev++;
+                if(node.left!=null){
+                    stack.push(node.left);
+                    stackLevel.push(stackLev);}
+                if(node.right!=null) {
+                    stack.push(node.right);
+                    stackLevel.push(stackLev);
+                }
             }
             else
-            {
-                maxLevel = Math.max(maxLevel, level);
-                System.out.println("maxLevel : "+ maxLevel);
-            }
-            if(node.right!=null) {
-                stack.push(node.right);
-            }else
-            {  maxLevel = Math.max(maxLevel, level);
-                //  level--;
-            }
-
+                maxLevel = Math.max(maxLevel, stackLev);
         }
-        return maxLevel+1;
+        return maxLevel;
     }
 
 }
