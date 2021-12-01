@@ -9,17 +9,17 @@ public class NAryPostOrderTraversal {
     }
 
 
-    public static List<Integer> preorderTraversal1(Node root, List<Integer> preOrderResult) {
+    public static List<Integer> preorderTraversal1(NNode root, List<Integer> preOrderResult) {
         if (root == null)
             return preOrderResult;
-        for (Node node : root.children) {
+        for (NNode node : root.children) {
             preorderTraversal1(node, preOrderResult);
             preOrderResult.add((Integer) root.val);
         }
         return preOrderResult;
     }
 
-    public List<Integer> postorder(Node root) {
+    public List<Integer> postorder(NNode root) {
         List<Integer> preOrderResult = new ArrayList<>();
         return preorderTraversal1(root, preOrderResult);
     }
@@ -28,18 +28,18 @@ public class NAryPostOrderTraversal {
 
 }
 
-class Node {
+class NNode {
     public int val;
-    public List<Node> children;
+    public List<NNode> children;
 
-    public Node() {
+    public NNode() {
     }
 
-    public Node(int _val) {
+    public NNode(int _val) {
         val = _val;
     }
 
-    public Node(int _val, List<Node> _children) {
+    public NNode(int _val, List<NNode> _children) {
         val = _val;
         children = _children;
     }
