@@ -21,4 +21,9 @@ public class T222CountCompleteTreeNodes {
         }
         return count;
     }
+    public static int countNodesRecrsive(TreeNode root) {
+        if(root == null)
+            return 0;
+        return 1 + countNodesRecrsive(root.left)+ countNodesRecrsive(root.right);
+    }
 }
