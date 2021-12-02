@@ -5,36 +5,57 @@ import java.util.Stack;
 public class T426ConvertBinarySearchTreeSortedDLL {
     public static void main(String args[]) {
         System.out.println("****************T270ClosestBinarySearchTreeValue**********");
+        Integer[] input = {4,2,5,1,3};
+        Node root
         System.out.println("****************T270ClosestBinarySearchTreeValue**********");
     }
-
+    public Node treeToDoublyListRecursive(Node root) {
+        if(root==null)
+            return null;
+        Node nextRoot = treeToDoublyList(root.left);
+        if(root!=null)
+            root.right = nextRoot;
+        if(nextRoot!=null)
+            nextRoot.left = root;
+        Node right = treeToDoublyList(root.right);
+        return nextRoot;
+    }
     public Node treeToDoublyList(Node root) {
         if(root==null)
-            return new Node();
-        Stack<Node> stack = new Stack<>();
-        stack.push(root);
-        Node head = null;
-     //   Node nextNode = null;
-        Node prevNode = null;
-        while(!stack.isEmpty()){
-            Node node = stack.pop();
-            System.out.println(node.val);
-            if(node.left!=null)
-                stack.push(node.left);
-            if(node.right!=null)
-                stack.push(node.right);
-            if(node.left==null && node.right==null && head==null) {
-                head = node;
-                prevNode = head;
-                head.left = null;
-            }
-            if(prevNode!=null){
-                prevNode.right = node;
-                node.left = prevNode;
-            }
+            return null;
 
+        Node prevRoot = treeToDoublyList(root.left);
+
+        if(prevRoot!=null && prevRoot.right==null)
+        {
+            //System.out.println( prevRoot.left.val + "--->" + prevRoot.val+"--> " + prevRoot.right.val );
+            prevRoot.right = root;
+            System.out.println(  "--->" + prevRoot.val+"--> " + prevRoot.right.val );
         }
-        return head;
+        root.left = prevRoot;
+
+        if(prevRoot!=null)
+            System.out.println("root : " + root.val + ", PrevRoot : "+ prevRoot.val);
+        else
+            System.out.println("root : " + root.val + ", PrevRoot : "+ prevRoot);
+
+
+        Node nextRoot = treeToDoublyList(root.right);
+        root.right = nextRoot;
+        if(root.right!=null)
+            System.out.println("root : " + root.val + ", nextRoot : "+ root.right.val);
+        else
+            System.out.println("root : " + root.val + ", nextRoot : "+ root.right);
+
+
+        if(nextRoot!=null)
+            System.out.println("returning : "+ nextRoot.val);
+
+
+
+        if(root.right ==null)
+            return root;
+        return root.right;
     }
     public void checkDLL(Node root){
         Node next = root.right;
