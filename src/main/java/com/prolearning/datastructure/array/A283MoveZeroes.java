@@ -8,11 +8,14 @@ public class A283MoveZeroes {
     }
     public void moveZeroes(int[] nums) {
         int cur=0;
-        for(int next=1; next<nums.length; next++){
-            if(nums[cur]==0 && nums[next]!=0){
+        for(int next=0; next<nums.length; next++){
+            if(cur != next && nums[next]!=0){
+                int temp = nums[cur];
                 nums[cur]=nums[next];
+                nums[next] = temp;
+                cur++;
             }
-            if(nums[cur]!=0){
+            else if(nums[cur]!=0 && cur==next){
                 cur++;
             }
         }
