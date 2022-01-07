@@ -6,7 +6,7 @@ public class T426ConvertBinarySearchTreeSortedDLL {
     public static void main(String args[]) {
         System.out.println("****************T270ClosestBinarySearchTreeValue**********");
         Integer[] input = {4,2,5,1,3};
-        Node root
+//        Node root
         System.out.println("****************T270ClosestBinarySearchTreeValue**********");
     }
     public Node treeToDoublyListRecursive(Node root) {

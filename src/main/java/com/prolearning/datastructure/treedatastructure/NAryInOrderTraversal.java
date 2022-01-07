@@ -12,10 +12,10 @@ public class NAryInOrderTraversal {
     public static List<Integer> inOrderTraversal(Node root, List<Integer> preOrderResult) {
         if (root == null)
             return preOrderResult;
-        for (Node node : root.children) {
-            preOrderResult.add((Integer) root.val);
-            inOrderTraversal(node, preOrderResult);
-        }
+//        for (Node node : root.children) {
+//            preOrderResult.add((Integer) root.val);
+//            inOrderTraversal(node, preOrderResult);
+//        }
         return preOrderResult;
     }
 
