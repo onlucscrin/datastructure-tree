@@ -1,16 +1,16 @@
 package com.prolearning.datastructure.matrix;
 
-public class SpiralPattern {
+public class SnakePattern {
     public static void main(String args[]){
         System.out.println("****SpiralMatrix****");
         int arr[][] = {{1, 2, 3, 4},
                 {5, 6, 7, 8},
                 {9, 10, 11, 12},
                 {13, 14, 15, 16}};
-        printSpiralPattern(arr);
+        printSnakePatter(arr);
         System.out.println("****SpiralMatrix****");
     }
-    public static void printSpiralPattern(int nums[][]) {
+    public static void printSnakePatter(int nums[][]) {
 
         for(int i=0;i<nums.length;i++) {
             if (i % 2 == 0) {
