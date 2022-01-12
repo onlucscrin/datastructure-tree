@@ -30,6 +30,5 @@ public class M48RotateImage {
                 matrix[row-1-i][j] = temp;
             }
         }
-//        return matrix;
     }
 }
